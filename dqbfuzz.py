@@ -18,8 +18,8 @@ def litstr(lits):
 
 def sample_subset(S, k=None):
     """
-        sample a dependency set of size d out of U
-        if d is not given, sample a subset uniformly
+        sample a subset of S of size k uniformly
+        if k is not given, sample a subset uniformly
     """
     if k != None:
         return random.sample(S, k)
@@ -42,13 +42,13 @@ def main(args):
     u = sample_param(args.u, args.s)
     x = sample_param(args.x, args.s)
     m = sample_param(args.m, args.s)
-    v = sample_param(args.v, args.s) if args.d != None else None
-    w = sample_param(args.w, args.s) if args.d != None else None
+    v = sample_param(args.v, args.s) if args.v != None else None
+    w = sample_param(args.w, args.s) if args.w != None else None
     d = sample_param(args.d, args.s) if args.d != None else None
 
     U = range(1, u+1)
     X = range(u+1, u+x+1)
-    S = {x : sample_subset(U, k=d) for x in X}
+    S = {x : sample_subset(U, d) for x in X}
     F = set()
     while len(F) < m:
         F.add(sample_clause(U, v, X, w))
