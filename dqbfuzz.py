@@ -57,6 +57,14 @@ def main(args):
     w = sample_param(args.w, args.s) if args.w != None else None
     d = sample_param(args.d, args.s) if args.d != None else None
 
+    u = max(u, 0)
+    x = max(x, 1)
+    m = max(m, 0)
+
+    v = max(min(v, u), 0)
+    w = max(min(w, x), 0)
+    d = max(min(d, u), 0)
+
     U = range(1, u+1)
     X = range(u+1, u+x+1)
     S = {x : sample_subset(U, d) for x in X}
